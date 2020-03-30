@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+    <!-- Import icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import styles.css (Custom CSS)-->
+    <link rel="stylesheet" href="css/styles.css"/>
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <title>To-Do Page</title>
+</head>
+
+<body>
+    <main class="container">
+        <div class="section">
+            <div class="row">
+                <div class="col xl10 offset-xl1 l8 offset-l2 m8 offset-m2 s12">
+                    <div class="card">
+                        <div class="card-content center">
+                            <h4>Write down your tasks</h4>
+                        </div>
+                        <div class="card-tabs">
+                            <ul class="tabs tabs-fixed-width">
+                                <li class="tab"><a href="#to-do">To Do</a></li>
+                                <li class="tab"><a href="#done">Done</a></li>
+                            </ul>
+                        </div>
+                        <div class="task-area row center">
+                            <div class="input-field col s10 offset-s1">
+                                <input placeholder="Next task" id="first_name" type="text" class="validate">
+                                <button class="btn">Add Task<i class="material-icons right">add</i></button>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <div id="to-do">
+                                <ul id="todo-list">
+                                    <li>To Do</li>
+                                    <li>To Do</li>
+                                    <li>To Do</li>
+                                    <li>To Do</li>
+                                </ul>
+                            </div>
+                            <div id="done">
+                                <ul id="done-list">
+                                    <li>Done</li>
+                                    <li>Done</li>
+                                    <li>Done</li>
+                                    <li>Done</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="page-footer">
+        <div class="container">
+            <p class="center-align">Developed with <i class="material-icons"> favorite </i> by <a href=""> Max Santos</a></p>
+        </div>
+    </footer>
+
+
+    <script
+        src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous">
+    </script>
+    <!--JavaScript at end of body for optimized loading-->
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+    <!-- Import local JavaScript file -->
+    <script src="js/jquery.js"></script>
+    <script src="js/main.js"></script>
+</body>
+  </html>
+        
