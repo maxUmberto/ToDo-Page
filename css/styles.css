@@ -19,3 +19,21 @@ main {
 .trashcan{
     cursor: pointer;
 }
+
+.btn{
+    background-color: #ee6e73;
+}
+
+input[type=text]:not(.browser-default):focus:not([readonly]){
+    border-bottom: 1px solid #ee6e73;
+    box-shadow: 0 1px 0 0 #ee6e73;
+}
+
+.page-footer p{
+    color: #000000;
+}
+
+.page-footer a{
+    color: #ffffff;
+    text-decoration: none;
+}
