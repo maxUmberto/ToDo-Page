@@ -1,23 +1,14 @@
-
+//Elements from the DOM that will be used
 let todoList = document.querySelector('#todo-list');
 let doneList = document.querySelector('#done-list');
 let inputElement = document.querySelector('#new-task');
 
+//Arrays to store the tasks
 const tasksTodo = JSON.parse(localStorage.getItem('tasksTodo')) || [];
 const tasksDone = JSON.parse(localStorage.getItem('tasksDone')) || [];
 
-function addTask(){
-    if(inputElement.value === ''){
-        return false;
-    }
-    let newTask = inputElement.value;
-
-    tasksTodo.push(newTask);
-    inputElement.value = '';
-
-    renderTasks();
-    saveToStorage();
-}
+renderTasks();
+renderTasksDone();
 
 function renderTasks(){
     todoList.innerHTML = '';
@@ -43,6 +34,67 @@ function renderTasks(){
         }
     }
 
+}
+
+function renderTasksDone(){
+    doneList.innerHTML = '';
+
+    if(tasksDone.length == 0){
+        let doneTask = document.createElement('li');
+        let taskText = document.createTextNode(`You don't have finished tasks`);
+
+        doneTask.setAttribute('class', 'center');
+
+        doneTask.appendChild(taskText);
+        doneList.appendChild(doneTask);
+
+    }
+    else{
+        for(done of tasksDone){
+            let doneTask = document.createElement('li');
+            let taskText = document.createTextNode(done);
+            let position = tasksDone.indexOf(done);
+            
+            doneTask.appendChild(addTrashCan(position));
+            doneTask.appendChild(taskText);
+            doneList.appendChild(doneTask);
+        }
+    }
+
+}
+
+function addTask(){
+    if(inputElement.value === ''){
+        return false;
+    }
+    let newTask = inputElement.value;
+
+    tasksTodo.push(newTask);
+    inputElement.value = '';
+
+    renderTasks();
+    saveToStorage();
+}
+
+function finishTask(position){
+    setTimeout(() => {
+        tasksDone.push(tasksTodo[position]);
+        tasksTodo.splice(position, 1);
+        renderTasks();
+        renderTasksDone();
+        saveToStorage();
+    },200);
+}
+
+function deleteTask(position){
+    tasksDone.splice(position, 1);
+    renderTasksDone();
+    saveToStorage();
+}
+
+function saveToStorage(){
+    localStorage.setItem('tasksTodo', JSON.stringify(tasksTodo));
+    localStorage.setItem('tasksDone', JSON.stringify(tasksDone));
 }
 
 function addLabel(position){
@@ -81,53 +133,10 @@ function changeTrashCanBack(trashCan){
     trashCan.innerHTML = 'delete';
 }
 
-function renderTasksDone(){
-    doneList.innerHTML = '';
 
-    if(tasksDone.length == 0){
-        let doneTask = document.createElement('li');
-        let taskText = document.createTextNode(`You don't have finished tasks`);
 
-        doneTask.setAttribute('class', 'center');
 
-        doneTask.appendChild(taskText);
-        doneList.appendChild(doneTask);
 
-    }
-    else{
-        for(done of tasksDone){
-            let doneTask = document.createElement('li');
-            let taskText = document.createTextNode(done);
-            let position = tasksDone.indexOf(done);
-            
-            doneTask.appendChild(addTrashCan(position));
-            doneTask.appendChild(taskText);
-            doneList.appendChild(doneTask);
-        }
-    }
 
-}
 
-function finishTask(position){
-    setTimeout(() => {
-        tasksDone.push(tasksTodo[position]);
-        tasksTodo.splice(position, 1);
-        renderTasks();
-        renderTasksDone();
-        saveToStorage();
-    },200);
-}
 
-function deleteTask(position){
-    tasksDone.splice(position, 1);
-    renderTasksDone();
-    saveToStorage();
-}
-
-function saveToStorage(){
-    localStorage.setItem('tasksTodo', JSON.stringify(tasksTodo));
-    localStorage.setItem('tasksDone', JSON.stringify(tasksDone));
-}
-
-renderTasks();
-renderTasksDone();
