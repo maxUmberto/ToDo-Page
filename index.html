@@ -33,17 +33,21 @@
                         </div>
                         <div class="task-area row center">
                             <div class="input-field col s10 offset-s1">
-                                <input placeholder="Next task" id="first_name" type="text" class="validate">
-                                <button class="btn">Add Task<i class="material-icons right">add</i></button>
+                                <input placeholder="Next task" id="new-task" type="text">
+                                <button class="btn" onclick="addTask()">Add Task<i class="material-icons right">add</i></button>
                             </div>
                         </div>
                         <div class="card-content">
                             <div id="to-do">
                                 <ul id="todo-list">
-                                    <li>To Do</li>
-                                    <li>To Do</li>
-                                    <li>To Do</li>
-                                    <li>To Do</li>
+                                </ul>
+                                <ul id="">
+                                    <li class="checkboxes"> 
+                                        <label>
+                                            <input type="checkbox" />
+                                            <span></span>
+                                        </label> Task test
+                                    </li>
                                 </ul>
                             </div>
                             <div id="done">

@@ -7,3 +7,11 @@ body {
 main {
     flex: 1 0 auto;
 }
+
+.card .row{
+    margin-bottom: 0;
+}
+
+.card .card-content{
+    font-size: 20pt;
+}
