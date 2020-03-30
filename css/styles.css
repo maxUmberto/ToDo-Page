@@ -20,8 +20,11 @@ main {
     cursor: pointer;
 }
 
-.btn{
+.btn, .btn:focus{
     background-color: #ee6e73;
+}
+.btn:hover{
+    background-color: #AE5154;
 }
 
 input[type=text]:not(.browser-default):focus:not([readonly]){
