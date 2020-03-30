@@ -7,6 +7,9 @@ const tasksTodo = JSON.parse(localStorage.getItem('tasksTodo')) || [];
 const tasksDone = JSON.parse(localStorage.getItem('tasksDone')) || [];
 
 function addTask(){
+    if(inputElement.value === ''){
+        return false;
+    }
     let newTask = inputElement.value;
 
     tasksTodo.push(newTask);
@@ -19,15 +22,27 @@ function addTask(){
 function renderTasks(){
     todoList.innerHTML = '';
 
-    for(task of tasksTodo){
+    if(tasksTodo.length == 0){
         let todoTask = document.createElement('li');
-        let taskText = document.createTextNode(task);
-        let position = tasksTodo.indexOf(task);
+        let taskText = document.createTextNode(`You don't have any task`);
+
+        todoTask.setAttribute('class', 'center');
         
-        todoTask.appendChild(addLabel(position));
         todoTask.appendChild(taskText);
         todoList.appendChild(todoTask);
     }
+    else{
+        for(task of tasksTodo){
+            let todoTask = document.createElement('li');
+            let taskText = document.createTextNode(task);
+            let position = tasksTodo.indexOf(task);
+            
+            todoTask.appendChild(addLabel(position));
+            todoTask.appendChild(taskText);
+            todoList.appendChild(todoTask);
+        }
+    }
+
 }
 
 function addLabel(position){
@@ -44,12 +59,75 @@ function addLabel(position){
     return labelElement;
 }
 
+function addTrashCan(position){
+    let iconElement = document.createElement('i');
+    let iconText = document.createTextNode('delete');
+    
+    iconElement.setAttribute('class', 'material-icons trashcan');
+    iconElement.setAttribute('onclick', `deleteTask(${position})`);
+    iconElement.setAttribute('onmouseover', `changeTrashCan(this)`);
+    iconElement.setAttribute('onmouseout', `changeTrashCanBack(this)`);
+
+    iconElement.appendChild(iconText);
+
+    return iconElement;
+}
+
+function changeTrashCan(trashCan){
+    trashCan.innerHTML = 'delete_forever';
+}
+
+function changeTrashCanBack(trashCan){
+    trashCan.innerHTML = 'delete';
+}
+
+function renderTasksDone(){
+    doneList.innerHTML = '';
+
+    if(tasksDone.length == 0){
+        let doneTask = document.createElement('li');
+        let taskText = document.createTextNode(`You don't have finished tasks`);
+
+        doneTask.setAttribute('class', 'center');
+
+        doneTask.appendChild(taskText);
+        doneList.appendChild(doneTask);
+
+    }
+    else{
+        for(done of tasksDone){
+            let doneTask = document.createElement('li');
+            let taskText = document.createTextNode(done);
+            let position = tasksDone.indexOf(done);
+            
+            doneTask.appendChild(addTrashCan(position));
+            doneTask.appendChild(taskText);
+            doneList.appendChild(doneTask);
+        }
+    }
+
+}
+
 function finishTask(position){
-    console.log('Tarefa finalizada');
+    setTimeout(() => {
+        tasksDone.push(tasksTodo[position]);
+        tasksTodo.splice(position, 1);
+        renderTasks();
+        renderTasksDone();
+        saveToStorage();
+    },200);
+}
+
+function deleteTask(position){
+    tasksDone.splice(position, 1);
+    renderTasksDone();
+    saveToStorage();
 }
 
 function saveToStorage(){
     localStorage.setItem('tasksTodo', JSON.stringify(tasksTodo));
+    localStorage.setItem('tasksDone', JSON.stringify(tasksDone));
 }
 
 renderTasks();
+renderTasksDone();
